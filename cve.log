@@ -1,8 +1,6 @@
-Scan results for image: quay.io/rhn-support-gong/vault-k8s:0.0.0-dev-2
-(TOTAL-COMPONENTS: 1, TOTAL-VULNERABILITIES: 1, LOW: 0, MODERATE: 0, IMPORTANT: 1, CRITICAL: 0)
+Scan results for image: quay.io/rhn-support-gong/vault-k8s:1.0.0
+(TOTAL-COMPONENTS: 0, TOTAL-VULNERABILITIES: 0, LOW: 0, MODERATE: 0, IMPORTANT: 0, CRITICAL: 0)
 
-+------------------+---------+----------------+-----------+------+-------------------------------------------------+---------------+----------+---------------+
-|    COMPONENT     | VERSION |      CVE       | SEVERITY  | CVSS |                      LINK                       | FIXED VERSION | ADVISORY | ADVISORY LINK |
-+------------------+---------+----------------+-----------+------+-------------------------------------------------+---------------+----------+---------------+
-| golang.org/x/net | v0.52.0 | CVE-2026-33814 | IMPORTANT | 7.5  | https://nvd.nist.gov/vuln/detail/CVE-2026-33814 |    0.53.0     |    -     |       -       |
-+------------------+---------+----------------+-----------+------+-------------------------------------------------+---------------+----------+---------------+
++-----------+---------+-----+----------+------+------+---------------+----------+---------------+
+| COMPONENT | VERSION | CVE | SEVERITY | CVSS | LINK | FIXED VERSION | ADVISORY | ADVISORY LINK |
++-----------+---------+-----+----------+------+------+---------------+----------+---------------+
