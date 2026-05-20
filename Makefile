@@ -1,3 +1,13 @@
+VAULT_K8s_VERSION := 0.0.0-dev-2
+podman-push:
+	podman push quay.io/rhn-support-gong/vault-k8s:$(VAULT_K8s_VERSION)
+
+podman-build: build
+	podman build \
+	--platform linux/amd64 \
+	-t quay.io/rhn-support-gong/vault-k8s:$(VAULT_K8s_VERSION) \
+	-f Dockerfile .
+
 REGISTRY_NAME ?= docker.io/hashicorp
 IMAGE_NAME = vault-k8s
 VERSION ?= 0.0.0-dev
