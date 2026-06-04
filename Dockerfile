@@ -14,12 +14,17 @@
 
 FROM docker.mirror.hashicorp.services/alpine:3.23.4 AS dev
 
+RUN apk update && apk upgrade --no-cache busybox
+
 RUN addgroup vault && \
     adduser -S -G vault vault
 
 ADD dist/vault-k8s /vault-k8s
 
 USER vault
+
+HEALTHCHECK --interval=30s --timeout=5s --start-period=5s --retries=3 \
+    CMD wget --no-check-certificate -q --spider https://localhost:8080/health/ready || exit 1
 
 ENTRYPOINT ["/vault-k8s"]
 
@@ -57,11 +62,15 @@ RUN addgroup vault && \
 RUN set -eux && \
     apk update && \
     apk add --no-cache ca-certificates libcap su-exec iputils && \
-    apk upgrade --no-cache libcrypto3
+    apk upgrade --no-cache libcrypto3 busybox
 
 COPY dist/$TARGETOS/$TARGETARCH/vault-k8s /bin/
 
 USER vault
+
+HEALTHCHECK --interval=30s --timeout=5s --start-period=5s --retries=3 \
+    CMD wget --no-check-certificate -q --spider https://localhost:8080/health/ready || exit 1
+
 ENTRYPOINT ["/bin/vault-k8s"]
 
 # This target creates a production ubi release image
@@ -112,6 +121,10 @@ RUN groupadd --gid 1000 vault && \
 COPY dist/$TARGETOS/$TARGETARCH/$BIN_NAME /bin/
 
 USER 100
+
+HEALTHCHECK --interval=30s --timeout=5s --start-period=5s --retries=3 \
+    CMD wget --no-check-certificate -q --spider https://localhost:8080/health/ready || exit 1
+
 ENTRYPOINT ["/bin/vault-k8s"]
 
 # ===================================
